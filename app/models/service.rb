@@ -8,7 +8,7 @@ class Service < ApplicationRecord
 
   def block_for(user_id)
     if self.blocked
-      raise "*#{self.name}* is already blocked by <@#{self.blocked_by}>"
+      raise "*#{self.short_name}* is already blocked by <@#{self.blocked_by}>"
     end
 
     self.blocked = true
@@ -20,7 +20,7 @@ class Service < ApplicationRecord
   def unblock_for(user_id)
     if self.blocked
       unless self.blocked_by == user_id
-        raise "*#{self.name}* must be unblocked by <@#{self.blocked_by}>. Please contact personally"
+        raise "*#{self.short_name}* must be unblocked by <@#{self.blocked_by}>. Please contact personally"
       end
 
       self.blocked = false
