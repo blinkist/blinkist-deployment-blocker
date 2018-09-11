@@ -67,6 +67,9 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     dotenv (2.5.0)
+    dotenv-rails (2.5.0)
+      dotenv (= 2.5.0)
+      railties (>= 3.2, < 6.0)
     draper (3.0.1)
       actionpack (~> 5.0)
       activemodel (~> 5.0)
@@ -191,6 +194,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   dotenv
+  dotenv-rails
   draper (>= 3.0.1)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
@@ -206,7 +210,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.3.6p384
+   ruby 2.5.1p57
 
 BUNDLED WITH
    1.16.4
