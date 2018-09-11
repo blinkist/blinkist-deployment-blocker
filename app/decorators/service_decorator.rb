@@ -1,11 +1,11 @@
 class ServiceDecorator < Draper::Decorator
   def format_for_status
     if object.blocked
-      response_text = "*#{object.short_name}* is *blocked* by <@#{object.blocked_by}> since #{blocked_from}"
+      response_text = "#{name} is *blocked* by #{by} since #{from}"
       color = Service::NOT_OK_COLOR
       response_type = Service::EPHEMERAL_RESPONSE
     else
-      response_text = "#{object.short_name} is *not blocked* and is ready for business"
+      response_text = "#{name} is *not blocked* and is ready for business"
       color = Service::OK_COLOR
       response_type = Service::EPHEMERAL_RESPONSE
     end
@@ -17,7 +17,7 @@ class ServiceDecorator < Draper::Decorator
   end
 
   def format_for_block
-    response_text = "*#{object.short_name}* has been *blocked* by <@#{object.blocked_by}>"
+    response_text = "#{name} has been *blocked* by #{by}"
     color = Service::OK_COLOR
     response_type = Service::IN_CHANNEL_RESPONSE
 
@@ -28,7 +28,7 @@ class ServiceDecorator < Draper::Decorator
   end
 
   def format_for_unblock
-    response_text = "*#{object.short_name}* has been *unblocked*"
+    response_text = "#{name} has been *unblocked*"
     color = Service::OK_COLOR
     response_type = Service::IN_CHANNEL_RESPONSE
 
@@ -38,8 +38,15 @@ class ServiceDecorator < Draper::Decorator
     }
   end
 
-
-  def blocked_from
+  def from
     object.blocked_at.strftime("%A, %B %e %I:%M%p")
+  end
+
+  def name
+    "*#{object.short_name}*"
+  end
+
+  def by
+    "<@#{object.blocked_by}>"
   end
 end
