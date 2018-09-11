@@ -6,8 +6,8 @@ default: &default
 development:
   <<: *default
   database: deployment_blocker_dev
-  username: postgres
-  password:
+  username: <%= ENV.fetch("DATABASE_USER") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -15,10 +15,10 @@ development:
 test:
   <<: *default
   database: deployment_blocker_test
-  username: postgres
-  password:
+  username: <%= ENV.fetch("DATABASE_USER") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
 
 production:
   <<: *default
   database: deployment_blocker_prod
-  username: postgres
+  url: <%= ENV['DATABASE_URL'] %>
