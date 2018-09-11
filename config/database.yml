@@ -6,8 +6,7 @@ default: &default
 development:
   <<: *default
   database: deployment_blocker_dev
-  username: <%= ENV.fetch("DATABASE_USER") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -15,8 +14,7 @@ development:
 test:
   <<: *default
   database: deployment_blocker_test
-  username: <%= ENV.fetch("DATABASE_USER") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 production:
   <<: *default
