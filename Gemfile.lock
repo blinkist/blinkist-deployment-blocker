@@ -67,10 +67,11 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     dotenv (2.5.0)
-    draper (1.4.0)
-      actionpack (>= 3.0)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
+    draper (3.0.1)
+      actionpack (~> 5.0)
+      activemodel (~> 5.0)
+      activemodel-serializers-xml (~> 1.0)
+      activesupport (~> 5.0)
       request_store (~> 1.0)
     erubi (1.7.1)
     execjs (2.7.0)
@@ -190,7 +191,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   dotenv
-  draper
+  draper (>= 3.0.1)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg
