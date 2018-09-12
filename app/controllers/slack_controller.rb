@@ -1,3 +1,5 @@
+require 'json'
+
 class SlackController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -10,7 +12,7 @@ class SlackController < ApplicationController
 
     SlackMessageSenderJob.perform_later(
       prms[:response_url],
-      message.to_s
+      message.to_json
     )
 
     head 200
@@ -27,7 +29,7 @@ class SlackController < ApplicationController
         attachments: [
           { color: "#FF0000", text: exception.message, mrkdwn_in: [:text] }
         ]
-      }.to_s
+      }.to_json
     )
   end
 

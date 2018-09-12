@@ -8,7 +8,7 @@ class SlackMessageSenderJob < ApplicationJob
     response = conn.post do |req|
       req.url uri.request_uri
       req.headers['Content-Type'] = 'application/json'
-      req.body = data.to_s
+      req.body = data
     end
 
     Rails.logger.info("Send data to #{callback_url} #{response.inspect}")
