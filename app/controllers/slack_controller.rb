@@ -21,7 +21,6 @@ class SlackController < ApplicationController
   private
 
   def render_error(exception)
-    p permitted_params[:response_url]
     SlackMessageSenderJob.perform_later(
       permitted_params[:response_url],
       {
