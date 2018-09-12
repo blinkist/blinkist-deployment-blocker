@@ -1,24 +1,50 @@
-# README
+# Deployment Blocker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project implements diplays the blocked/unblocked status of services. It integrates with Slack. 
 
-Things you may want to cover:
+## Development 
+### Setup Rails
 
-* Ruby version
+```shell
+# Install Ruby 2.5.1 via RVM
+$ rvm install 2.5.1
 
-* System dependencies
+# Install bundler
+$ gem install bundler
 
-* Configuration
+# Install all gems
+$ bundle install
+```
 
-* Database creation
+### Setup Development App
+Change the `.env.sample` file to `.env.development` replace the info in `.env` file. 
 
-* Database initialization
+### CSS Framework
+...
 
-* How to run the test suite
+### Run the App locally
 
-* Services (job queues, cache servers, search engines, etc.)
+```shell
+$ rails s
+```
 
-* Deployment instructions
+Now visit [http://0.0.0.0:3000](http://0.0.0.0:3000) in your favourite browser. 
 
-* ...
+## Tests
+### Run Tests
+
+...
+
+## Deployment 
+
+Continues integration via Codeship is setup. It also deploys the code to Heroku automatically. 
+
+Visit: [https://deployment-blocker.herokuapp.com](https://deployment-blocker.herokuapp.com)
+
+## Statuses
+
+|Tool  | Codeship CI/CD  |
+|------|-----------------|
+|**Status**|[![Build Status](https://app.codeship.com/projects/b3478420-98f0-0136-6617-1ad007865680/status?branch=master)](https://app.codeship.com/projects/305384)|
+
+## 🌟 Ideas for improvements
