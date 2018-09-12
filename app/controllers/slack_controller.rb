@@ -8,18 +8,27 @@ class SlackController < ApplicationController
 
     message = CommandService.new(user_id: prms[:user_id], text: prms[:text]).process
 
-    render json: message
+    SlackMessageSenderJob.perform_later(
+      prms[:response_url],
+      message.to_s
+    )
+
+    head 200
   end
 
   private
 
   def render_error(exception)
-    render json: {
-      response_type: "ephemeral",
-      attachments: [
-        { color: "#FF0000", text: exception.message, mrkdwn_in: [:text] }
-      ]
-    }
+    p permitted_params[:response_url]
+    SlackMessageSenderJob.perform_later(
+      permitted_params[:response_url],
+      {
+        response_type: "ephemeral",
+        attachments: [
+          { color: "#FF0000", text: exception.message, mrkdwn_in: [:text] }
+        ]
+      }.to_s
+    )
   end
 
   def permitted_params
