@@ -6,6 +6,8 @@ class Service < ApplicationRecord
   EPHEMERAL_RESPONSE = "ephemeral"
   IN_CHANNEL_RESPONSE = "in_channel"
 
+  MAX_BLOCKING_TIME = 4.hours
+
   def block_for(user_id)
     if self.blocked
       raise "*#{self.short_name}* is already blocked by <@#{self.blocked_by}>"
@@ -19,7 +21,7 @@ class Service < ApplicationRecord
 
   def unblock_for(user_id)
     if self.blocked
-      unless self.blocked_by == user_id
+      unless self.blocked_by == user_id || (Time.now - self.blocked_at > MAX_BLOCKING_TIME)
         raise "*#{self.short_name}* must be unblocked by <@#{self.blocked_by}>. Please contact personally"
       end
 
