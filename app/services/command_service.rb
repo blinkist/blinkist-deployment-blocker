@@ -80,7 +80,7 @@ class CommandService
 
     service.block_for(@user_id)
 
-    ServiceDecorator.decorate(service).format_for_block
+    ServiceDecorator.decorate(service).format_for_block(@user_id)
   end
 
   def process_unblock_command
@@ -88,7 +88,7 @@ class CommandService
 
     service.unblock_for(@user_id)
 
-    ServiceDecorator.decorate(service).format_for_unblock
+    ServiceDecorator.decorate(service).format_for_unblock(@user_id)
   end
 
   def service_from_params

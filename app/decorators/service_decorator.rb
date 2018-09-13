@@ -16,8 +16,8 @@ class ServiceDecorator < Draper::Decorator
     }
   end
 
-  def format_for_block
-    response_text = "#{name} has been *blocked* by #{by}"
+  def format_for_block(user_id)
+    response_text = "#{name} has been *blocked* by <@#{user_id}>"
     color = Service::OK_COLOR
     response_type = Service::IN_CHANNEL_RESPONSE
 
@@ -27,8 +27,8 @@ class ServiceDecorator < Draper::Decorator
     }
   end
 
-  def format_for_unblock
-    response_text = "#{name} has been *unblocked*"
+  def format_for_unblock(user_id)
+    response_text = "#{name} has been *unblocked* by <@#{user_id}>"
     color = Service::OK_COLOR
     response_type = Service::IN_CHANNEL_RESPONSE
 
