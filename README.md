@@ -1,24 +1,30 @@
-# README
+# Deployment Blocker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+As simple application which records blocking/unblocking a service
 
-Things you may want to cover:
+## Slack Integration
 
-* Ruby version
+The integration with slack is available via the slash command `/blinkistservice`
 
-* System dependencies
+### Usage
+* * *
 
-* Configuration
+#### `/blinkistservice help`
 
-* Database creation
+Shows the help section with usage details
+* * *
 
-* Database initialization
+#### `/blinkistservice status`
 
-* How to run the test suite
+Show the status of sevices available
+* * *
 
-* Services (job queues, cache servers, search engines, etc.)
+#### `/blinkistservice block <service-shortname>`
 
-* Deployment instructions
+Blocks a service for the current user. If the service has already been blocked, then this shows an error.
+* * *
 
-* ...
+#### `/blinkistservice unblock <service-shortname>`
+
+Unblocks a service. The service should have been blocked previously by the same user or should have been blocked for more than 4 hours. 
+* * *
