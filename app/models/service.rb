@@ -8,6 +8,8 @@ class Service < ApplicationRecord
 
   MAX_BLOCKING_TIME = 4.hours
 
+  scope :ordered_by_name, -> { order(:name) }
+
   def block_for(user_id)
     if self.blocked
       raise "*#{self.short_name}* is already blocked by <@#{self.blocked_by}>"

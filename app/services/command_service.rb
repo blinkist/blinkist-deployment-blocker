@@ -69,7 +69,7 @@ class CommandService
     service = Service.find_by_short_name(@service_name)
 
     if service.nil?
-      ServicesDecorator.decorate(Service.all.to_a).format_for_status
+      ServicesDecorator.decorate(Service.all.ordered_by_name.to_a).format_for_status
     else
       ServiceDecorator.decorate(service).format_for_status
     end
