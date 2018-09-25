@@ -57,5 +57,9 @@ Service.create([
   {
     name: "Blinkist Marketeer",
     short_name: "blinkist-marketeer"
+  },
+  {
+    name: "Blinkist CRM",
+    short_name: "blinkist-crm"
   }
 ])
