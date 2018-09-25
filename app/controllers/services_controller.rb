@@ -62,7 +62,7 @@ class ServicesController < ApplicationController
   end
 
   private
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_service
     @service = Service.find(params[:id])
@@ -70,6 +70,6 @@ class ServicesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def service_params
-    params.require(:service).permit(:name, :blocked)
+    params.require(:service).permit(:name, :short_name, :blocked)
   end
 end
