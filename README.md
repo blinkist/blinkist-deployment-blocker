@@ -1,30 +1,50 @@
 # Deployment Blocker
 
-As simple application which records blocking/unblocking a service
+This project implements displays the blocked/unblocked status of services. It integrates with Slack.
 
-## Slack Integration
+## Development
+### Setup Rails
 
-The integration with slack is available via the slash command `/blinkistservice`
+```shell
+# Install Ruby 2.5.1 via RVM / rbenv
+$ rvm install 2.5.1
 
-### Usage
-* * *
+# Install bundler
+$ gem install bundler
 
-#### `/blinkistservice help`
+# Install all gems
+$ bundle install
+```
 
-Shows the help section with usage details
-* * *
+### Setup Development App
+Change the `.env.sample` file to `.env.development` replace the info in `.env` file.
 
-#### `/blinkistservice status`
+### CSS Framework
+...
 
-Show the status of sevices available
-* * *
+### Run the App locally
 
-#### `/blinkistservice block <service-shortname>`
+```shell
+$ rails s
+```
 
-Blocks a service for the current user. If the service has already been blocked, then this shows an error.
-* * *
+Now visit [http://0.0.0.0:3000](http://0.0.0.0:3000) in your favourite browser.
 
-#### `/blinkistservice unblock <service-shortname>`
+## Tests
+### Run Tests
 
-Unblocks a service. The service should have been blocked previously by the same user or should have been blocked for more than 4 hours. 
-* * *
+...
+
+## Deployment
+
+Continues integration via Codeship is setup. It also deploys the code to Heroku automatically.
+
+Visit: [https://deployment-blocker.herokuapp.com](https://deployment-blocker.herokuapp.com)
+
+## Statuses
+
+|Tool  | Codeship CI/CD  |
+|------|-----------------|
+|**Status**|[![Build Status](https://app.codeship.com/projects/b3478420-98f0-0136-6617-1ad007865680/status?branch=master)](https://app.codeship.com/projects/305384)|
+
+## 🌟 Ideas for improvements

@@ -1,6 +1,6 @@
 class Service < ApplicationRecord
   OK_COLOR = "#2CE080"
-  NOT_OK_COLOR = "#03314B"
+  NOT_OK_COLOR = "#FF445D"
   ERROR_COLOR = "#FF0000"
 
   EPHEMERAL_RESPONSE = "ephemeral"
