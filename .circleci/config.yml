@@ -39,10 +39,6 @@ jobs:
           paths:
             - vendor/bundle
 
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
-
       - type: shell
         name: Migrate DB
         command: bundle exec rails db:migrate
