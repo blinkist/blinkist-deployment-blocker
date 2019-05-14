@@ -1,15 +1,62 @@
-# Use the latest 2.1 version of CircleCI pipeline processing engine, see https://circleci.com/docs/2.0/configuration-reference/
-version: 2.1
+version: 2
 
-# Use a package of configuration called an orb, see https://circleci.com/docs/2.0/orb-intro/
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.3.1
+defaults_deploy: &defaults_deploy
+  working_directory: ~/app
+  shell: /bin/bash --login
+  docker:
+    - image: circleci/ruby:2.5.3-node-browsers
 
-# Orchestrate or schedule a set of jobs, see https://circleci.com/docs/2.0/workflows/
-workflows:
-  # Name the workflow "Welcome"
-  Welcome:
-    # Run the welcome/run job in its own container
-    jobs:
-      - welcome/run
+jobs:
+  specs:
+    working_directory: ~/app
+    parallelism: 1
+    docker:
+      - image: circleci/ruby:2.5.3-node-browsers
+        environment:
+          CIRCLE_CI: true
+          RAILS_ENV: test
+          MYSQL_URL: "mysql2://root:mysql@127.0.0.1/content_interaction_test"
+      - image: circleci/mysql:5.6
+        environment:
+          MYSQL_DATABASE: content_interaction_test
+          MYSQL_ROOT_PASSWORD: mysql
+
+    steps:
+      - checkout
+      - run: git submodule update --init
+
+      - restore_cache:
+          keys:
+            - rails-bundle-{{ checksum "Gemfile.lock" }}
+            - rails-bundle-
+      - run:
+          name: Bundle Install
+          command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
+
+      - save_cache:
+          key: rails-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+
+      - type: shell
+        name: Rubocop
+        command: bundle exec rubocop
+
+      - type: shell
+        name: Migrate DB
+        command: bundle exec rails db:migrate
+
+      - type: shell
+        name: Rspec
+        command: |
+              bundle exec rspec --profile 10 \
+                                --format RspecJunitFormatter \
+                                --out test_results/rspec.xml \
+                                --format progress \
+                                $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results
