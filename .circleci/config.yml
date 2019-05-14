@@ -43,10 +43,6 @@ jobs:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
 
       - type: shell
-        name: Rubocop
-        command: bundle exec rubocop
-
-      - type: shell
         name: Migrate DB
         command: bundle exec rails db:migrate
 
