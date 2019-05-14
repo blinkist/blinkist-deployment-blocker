@@ -15,11 +15,13 @@ jobs:
         environment:
           CIRCLE_CI: true
           RAILS_ENV: test
-          MYSQL_URL: "mysql2://root:mysql@127.0.0.1/content_interaction_test"
-      - image: circleci/mysql:5.6
+          REDIS_URL: "redis://127.0.0.1"
+          POSTGRES_URL: "postgres://root:postgres@127.0.0.1:5432"
+       - image: circleci/postgres:9.6.2-alpine
         environment:
-          MYSQL_DATABASE: content_interaction_test
-          MYSQL_ROOT_PASSWORD: mysql
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: root
 
     steps:
       - checkout
