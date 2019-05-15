@@ -15,12 +15,12 @@ jobs:
         environment:
           CIRCLE_CI: true
           RAILS_ENV: test
-          POSTGRES_URL: "postgres://root:postgres@127.0.0.1:5432"
+          POSTGRES_URL: "postgres://postgres:postgres@127.0.0.1/deployment_blocker_dev"
       - image: circleci/postgres:9.6.2-alpine
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: root
+          POSTGRES_DB: deployment_blocker_dev
 
     steps:
       - checkout
@@ -43,9 +43,6 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - type: shell
-        name: Migrate DB
-        command: bundle exec rails db:migrate
 
 
 
