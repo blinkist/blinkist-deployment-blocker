@@ -112,7 +112,6 @@ workflows:
               only:
                 - master
                 - develop
-                - develop
       - deploy-web:
           context: Github
           requires:
