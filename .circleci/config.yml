@@ -81,6 +81,22 @@ jobs:
                docker push ${ECR_REPO_BASE}/${APP_NAME}:$CIRCLE_SHA1
             fi
 
+    deploy-web:
+      <<: *defaults_deploy
+      steps:
+        - checkout
+        - setup_remote_docker: {docker_layer_caching: true}
+        - run:
+            name: Deploy to AWS
+            command: |
+              if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+                docker run -e AWS_DEFAULT_REGION="${DEV_REGION}" -e AWS_ACCESS_KEY_ID="$ECS_DEPLOY_AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$ECS_DEPLOY_AWS_SECRET_ACCESS_KEY" blinkist/ecs-deploy:$ECS_DEPLOY_VERSION -c $DEV_CLUSTER_WEB  -n ${APP_NAME}-web -i  ${ECR_REPO_BASE}/${APP_NAME}:$CIRCLE_SHA1 -t 240 -a $DEV_DEPLOY_ROLE
+              fi
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                docker run -e AWS_DEFAULT_REGION="${PROD_REGION}" -e AWS_ACCESS_KEY_ID="$ECS_DEPLOY_AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$ECS_DEPLOY_AWS_SECRET_ACCESS_KEY" blinkist/ecs-deploy:$ECS_DEPLOY_VERSION -c $PROD_CLUSTER_WEB  -n ${APP_NAME}-web -i  ${ECR_REPO_BASE}/${APP_NAME}:$CIRCLE_SHA1 -t 240 -a $PROD_DEPLOY_ROLE
+              fi
+
+
 workflows:
   version: 2
   test_and_build:
@@ -91,6 +107,16 @@ workflows:
           context: Github
           requires:
             - specs
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - develop
+      - deploy-web:
+          context: Github
+          requires:
+            - build_and_push_docker_image
           filters:
             branches:
               only:
