@@ -33,4 +33,8 @@ class Service < ApplicationRecord
       self.save!
     end
   end
+
+  def find_by_short_name(short_name)
+    super(short_name.downcase)
+  end
 end
