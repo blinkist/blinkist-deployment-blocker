@@ -4,14 +4,14 @@ defaults_deploy: &defaults_deploy
   working_directory: ~/app
   shell: /bin/bash --login
   docker:
-    - image: circleci/ruby:2.5.1-node-browsers
+    - image: circleci/ruby:2.5.3-node-browsers
 
 jobs:
   specs:
     working_directory: ~/app
     parallelism: 1
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.5.3-node-browsers
         environment:
           CIRCLE_CI: true
           RAILS_ENV: test
