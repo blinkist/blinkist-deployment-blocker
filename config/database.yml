@@ -4,15 +4,15 @@ default: &default
 
 development:
   <<: *default
-  url: <%= ENV["MYSQL_URL"] || ENV["MYSQL_DEV_URL"] %>
+  url: <%= ENV["MYSQL_URL"] || ENV["MYSQL_DEV_URL"] || "mysql2://root:@localhost/blinkist-deployment-blocker_development" %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  url: <%= ENV["MYSQL_URL"] || ENV["MYSQL_TEST_URL"] %>
+  url: <%= ENV["MYSQL_URL"] || ENV["MYSQL_TEST_URL"] || "mysql2://root:@localhost/blinkist-deployment-blocker_test"%>
 
 production:
   <<: *default
-  url: <%= ENV["MYSQL_URL"] || ENV["MYSQL_DEV_URL"] %>
+  url: <%= Blinkist::Config.get!("database_url") %>
