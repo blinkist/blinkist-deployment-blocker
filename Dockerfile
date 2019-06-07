@@ -4,7 +4,7 @@ MAINTAINER operations@blinkist.com
 LABEL APP_NAME=deploymentblocker
 
 ENV BUILD_PACKAGES build-base git
-ENV RUNTIME_PACKAGES mysql-dev nodejs
+ENV RUNTIME_PACKAGES mysql-dev nodejs tzdata
 ENV RAILS_ENV=production APP_NAME=deploymentblocker LANG=C.UTF-8 LANGUAGE=C.UTF-8 LC_ALL=C.UTF-8 LC_CTYPE=C.UTF-8
 
 ARG BUNDLE_GITHUB__COM
