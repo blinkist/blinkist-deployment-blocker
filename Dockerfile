@@ -1,4 +1,4 @@
-FROM ruby:2.5.3-alpine
+FROM ruby:2.6.3-alpine
 MAINTAINER operations@blinkist.com
 
 LABEL APP_NAME=deploymentblocker
@@ -12,7 +12,6 @@ ARG BUNDLE_GITHUB__COM
 RUN mkdir /app && echo 'gem: --no-document' >> ~/.gemrc
 
 WORKDIR /app
-
 COPY Gemfile* /app/
 COPY .ruby-version /app/
 
@@ -28,7 +27,9 @@ RUN apk del $BUILD_PACKAGES
 
 ADD . /app
 
-RUN chown -R nobody:nogroup /app
+RUN mkdir /nonexistent
+
+RUN chown -R nobody:nogroup /app /nonexistent
 
 USER nobody
 
