@@ -4,14 +4,14 @@ defaults_deploy: &defaults_deploy
   working_directory: ~/app
   shell: /bin/bash --login
   docker:
-    - image: circleci/ruby:2.5.3-node-browsers
+    - image: circleci/ruby:2.6.3-node-browsers
 
 jobs:
   specs:
     working_directory: ~/app
     parallelism: 1
     docker:
-      - image: circleci/ruby:2.5.3-node-browsers
+      - image: circleci/ruby:2.6.3-node-browsers
         environment:
           CIRCLE_CI: true
           RAILS_ENV: test
@@ -27,14 +27,14 @@ jobs:
 
       - restore_cache:
           keys:
-            - rails-bundle-{{ checksum "Gemfile.lock" }}
-            - rails-bundle-
+            - rails-2.6.3-bundle-{{ checksum "Gemfile.lock" }}
+            - rails-2.6.3-bundle-
       - run:
           name: Bundle Install
           command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
 
       - save_cache:
-          key: rails-bundle-{{ checksum "Gemfile.lock" }}
+          key: rails-2.6.3-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
