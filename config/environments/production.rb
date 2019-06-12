@@ -94,3 +94,6 @@ Rails.application.configure do
 
   config.secret_key_base = Blinkist::Config.get!("secret_key_base")
 end
+
+
+config.serve_static_assets = true
