@@ -1,4 +1,4 @@
-Rails.application.configure do
+Rails.application.configure do |config|
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -93,6 +93,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.secret_key_base = Blinkist::Config.get!("secret_key_base")
-
-  config.serve_static_assets = true
 end
+
+
+config.serve_static_assets = true
