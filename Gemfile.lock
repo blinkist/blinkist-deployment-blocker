@@ -51,6 +51,10 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    airbrake (9.2.2)
+      airbrake-ruby (~> 4.4)
+    airbrake-ruby (4.4.0)
+      rbtree3 (~> 0.5)
     arel (9.0.0)
     aws-eventstream (1.0.3)
     aws-partitions (1.172.0)
@@ -164,6 +168,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    rbtree3 (0.5.0)
     request_store (1.4.1)
       rack (>= 1.4)
     ruby_dep (1.5.0)
@@ -214,6 +219,7 @@ PLATFORMS
 
 DEPENDENCIES
   activemodel-serializers-xml!
+  airbrake
   blinkist-config (~> 1.2)
   bootsnap (>= 1.1.0)
   byebug
