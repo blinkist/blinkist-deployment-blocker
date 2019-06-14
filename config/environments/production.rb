@@ -93,6 +93,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.secret_key_base = Blinkist::Config.get!("secret_key_base")
-
-  config.serve_static_assets = true
 end
