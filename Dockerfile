@@ -27,8 +27,6 @@ RUN apk del $BUILD_PACKAGES
 
 ADD . /app
 
-RUN bundle exec rake assets:precompile assets:sync assets:clean
-
 RUN mkdir /nonexistent
 
 RUN chown -R nobody:nogroup /app /nonexistent
