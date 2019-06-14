@@ -7,6 +7,9 @@ ENV BUILD_PACKAGES build-base git
 ENV RUNTIME_PACKAGES mysql-dev nodejs nodejs-npm tzdata
 ENV RAILS_ENV=production APP_NAME=deploymentblocker LANG=C.UTF-8 LANGUAGE=C.UTF-8 LC_ALL=C.UTF-8 LC_CTYPE=C.UTF-8
 
+ARG SECRET_KEY_BASE=
+ARG AIRBRAKE_PROJECT_ID=
+ARG AIRBRAKE_PROJECT_KEY=
 ARG BUNDLE_GITHUB__COM
 
 RUN mkdir /app && echo 'gem: --no-document' >> ~/.gemrc
