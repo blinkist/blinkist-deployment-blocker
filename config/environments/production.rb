@@ -10,7 +10,7 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
-  config.serve_static_files = true
+  config.serve_static_files = false
   config.assets.compress = true
   config.assets.enabled = true
 

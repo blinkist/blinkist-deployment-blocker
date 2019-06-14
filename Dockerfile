@@ -32,7 +32,7 @@ ADD . /app
 
 RUN mkdir /nonexistent
 
-RUN bundle exec rake assets:precompile assets:sync assets:clean
+# RUN bundle exec rake assets:precompile assets:clean
 
 RUN chown -R nobody:nogroup /app /nonexistent
 
