@@ -7,59 +7,67 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Service.create([
   {
-    name: "Blinkist Web",
-    short_name: "blinkist-web"
-  },
-  {
-    name: "Blinkist Messenger",
-    short_name: "blinkist-messenger"
-  },
-  {
-    name: "Blinkist Alchemist",
-    short_name: "blinkist-alchemist"
-  },
-  {
-    name: "Blinkist Api",
-    short_name: "blinkist-api"
-  },
-  {
-    name: "Blinkist Core",
-    short_name: "blinkist-core"
-  },
-  {
-    name: "Blinkist Magazine",
-    short_name: "blinkist-magazine"
+    name: "Blinkist Abtester",
+    short_name: "abtester"
   },
   {
     name: "Blinkist Admin",
-    short_name: "blinkist-admin"
+    short_name: "admin"
   },
   {
-    name: "Blinkist Outpost",
-    short_name: "blinkist-outpost"
+    name: "Blinkist Alchemist",
+    short_name: "alchemist"
   },
   {
-    name: "Blinkist Job System",
-    short_name: "blinkist-jobsystem"
+    name: "Blinkist Api",
+    short_name: "api"
   },
   {
-    name: "Blinkist Abtester",
-    short_name: "blinkist-abtester"
+    name: "Blinkist Content Interaction",
+    short_name: "content-interaction"
   },
   {
-    name: "Blinkist Watchman",
-    short_name: "blinkist-watchman"
-  },
-  {
-    name: "Blinkist Watchman CLient",
-    short_name: "blinkist-watchmanclient"
-  },
-  {
-    name: "Blinkist Marketeer",
-    short_name: "blinkist-marketeer"
+    name: "Blinkist Core",
+    short_name: "core"
   },
   {
     name: "Blinkist CRM",
-    short_name: "blinkist-crm"
+    short_name: "crm"
+  },
+  {
+    name: "Blinkist Job System",
+    short_name: "job-system"
+  },
+  {
+    name: "Blinkist Magazine",
+    short_name: "magazine"
+  },
+  {
+    name: "Blinkist Marketeer",
+    short_name: "marketeer"
+  },
+  {
+    name: "Blinkist Messenger",
+    short_name: "messenger"
+  },
+  {
+    name: "Blinkist MS Content",
+    short_name: "ms-content"
+  },
+  {
+    name: "Blinkist Outpost",
+    short_name: "outpost"
+  },
+  {
+    name: "Blinkist Watchman",
+    short_name: "watchman"
+  },
+  {
+    name: "Blinkist Watchman Client",
+    short_name: "watchman-client"
+  },
+  {
+    name: "Blinkist Web",
+    short_name: "web"
   }
 ])
