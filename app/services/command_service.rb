@@ -36,7 +36,7 @@ class CommandService
               "author_name": "Blinkist",
               "author_link": "http://github.com/blinkist",
               "author_icon": "https://avatars1.githubusercontent.com/u/2903478?s=200&v=4",
-              "title": "BlinkistService Usage : /service <command>\nCommand Options",
+              "title": "Usage : /service <command>\nCommand Options",
               "fields": [
                   {
                     "title": "status",
