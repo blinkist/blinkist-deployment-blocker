@@ -6,8 +6,8 @@ This project implements displays the blocked/unblocked status of services. It in
 ### Setup Rails
 
 ```shell
-# Install Ruby 2.5.1 via RVM / rbenv
-$ rvm install 2.5.1
+# Install Ruby 2.6.3 via RVM / rbenv
+$ rvm install 2.6.3
 
 # Install bundler
 $ gem install bundler
