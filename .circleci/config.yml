@@ -56,12 +56,14 @@ jobs:
           command:  $(docker run -e AWS_DEFAULT_REGION="$ECS_DEPLOY_AWS_DEFAULT_REGION" -e AWS_ACCESS_KEY_ID="$ECS_DEPLOY_AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$ECS_DEPLOY_AWS_SECRET_ACCESS_KEY" --entrypoint /usr/bin/aws blinkist/ecs-deploy:$ECS_DEPLOY_VERSION ecr get-login --no-include-email)
 
       - run:
-          name: Building docker image
+          name: Building and pushing Docker image
           command: |
             BUILD_ARGS=""
+
             if egrep -q "^ARG [0-9a-zA-Z\_\-]+$" ./Dockerfile ;then
               ARGS=$(cat ./Dockerfile |grep "^ARG "|grep -v "=" | sed 's/ARG //g'|xargs )
             fi
+
             if [ -z ${ARGS+x} ]; then
               echo "- no ARG defined in Dockerfile;"
             else
@@ -72,7 +74,8 @@ jobs:
                 BUILD_ARGS+=" --build-arg $i=$VAL "
               done
             fi
-            if docker run -e AWS_DEFAULT_REGION="$ECS_DEPLOY_AWS_DEFAULT_REGION" -e AWS_ACCESS_KEY_ID="$ECS_DEPLOY_AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$ECS_DEPLOY_AWS_SECRET_ACCESS_KEY" --entrypoint /usr/bin/aws  ecr describe-images --repository-name=$APP_NAME --image-ids=imageTag=$CIRCLE_SHA1 --region $ECS_DEPLOY_AWS_DEFAULT_REGION >/dev/null  2>/dev/null ; then
+
+            if docker run -e AWS_DEFAULT_REGION="$ECS_DEPLOY_AWS_DEFAULT_REGION" -e AWS_ACCESS_KEY_ID="$ECS_DEPLOY_AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$ECS_DEPLOY_AWS_SECRET_ACCESS_KEY" --entrypoint /usr/bin/aws blinkist/ecs-deploy:$ECS_DEPLOY_VERSION ecr describe-images --repository-name=$APP_NAME --image-ids=imageTag=$CIRCLE_SHA1 --region $ECS_DEPLOY_AWS_DEFAULT_REGION >/dev/null  2>/dev/null ; then
                echo "Image already exists, we don't have to build"
             else
                echo "Image does not exist, let's build"
@@ -80,7 +83,6 @@ jobs:
                docker build $BUILD_ARGS -t ${ECR_REPO_BASE}/${APP_NAME}:$CIRCLE_SHA1 .
                docker push ${ECR_REPO_BASE}/${APP_NAME}:$CIRCLE_SHA1
             fi
-
   deploy-web:
     <<: *defaults_deploy
     steps:
